@@ -270,6 +270,11 @@ declare class Shopify {
       orderId: number,
       id: number,
       params: any
+    ) => Promise<Shopify.IFulfillment>,
+    updateTracking: (
+      orderId: number,
+      id: number,
+      params: Shopify.IFulfillmentTrackingInfo
     ) => Promise<Shopify.IFulfillment>;
   };
   fulfillmentEvent: {
@@ -1501,6 +1506,17 @@ declare namespace Shopify {
     tracking_urls: string[];
     updated_at: string;
     variant_inventory_management: string;
+  }
+
+  interface IFulfillmentTrackingUpdate {
+    notify_customer: boolean;
+    tracking_info: IFulfillmentTrackingInfo
+  }
+
+  interface IFulfillmentTrackingInfo {
+    number: string;
+    company: string;
+    url?: string;
   }
 
   type FulfillmentEventStatus =

@@ -64,4 +64,15 @@ Fulfillment.prototype.cancel = function cancel(orderId, id) {
     .then(body => body[this.key]);
 };
 
+Fulfillment.prototype.updateTracking = function updateTracking(orderId, id, trackingInfo) {
+  const url = this.buildUrl(orderId, `${id}/update_tracking.json`);
+  return this.shopify
+    .request(url, 'POST', 'fulfillment', {
+      fulfillment: {
+        notify_customer: true,
+        tracking_info: trackingInfo
+      }
+    });
+};
+
 module.exports = Fulfillment;
